@@ -31,22 +31,9 @@ router.get('/add', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-     let newBook = book({
-      "Title": req.body.title,
-      "Price": req.body.price,
-      "Author":req.body.author,
-      "Genre": req.body.genre
-    })
-    books.create(newBook,(err, books)=>{
-      if(err){
-        console.log(err);
-        res.end(err);
-      }
-      else
-      {
-        res.redirect('/books');
-      }
-    })
+
+      res.render('books/details', {title: "Add", page: 'details', books: ''});
+
 });
 
 // POST process the Book Details page and create a new Book - CREATE
@@ -79,17 +66,13 @@ router.get('/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-     let id = new mongoose.Types.ObjectId(req.params.id);
-     book.findById(id,(err,bookToEdit)=>{
-       if(err){
-         console.log(err);
-         res.end(err);
-       }
-       else
-       {
-         res.render('books/details',{title:'Edit Book', books: bookToEdit})
-       }
-     })
+
+     
+       
+         res.render('books/details',{title:'Edit Book', page: 'details', books: ''})
+
+       
+     
 });
 
 // POST - process the information passed from the details form and update the document
@@ -98,8 +81,8 @@ router.post('/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-let id = new mongoose.Types.ObjectId(req.params.id);
-    let bookToEdit =book({
+    let id = new mongoose.Types.ObjectId(req.params.id);
+    let bookToEdit = book({
       "_id": id,
       "Title": req.body.title,
       "Price": req.body.price,
@@ -130,7 +113,7 @@ router.get('/delete/:id', (req, res, next) => {
         console.log(err);
         res.end(err);
       }
-      //else
+      else
       {
         res.redirect('/books')
       }
