@@ -42,6 +42,7 @@ router.post('/add', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
+    
      let newBook = book({
       "Title": req.body.title,
       "Price": req.body.price,
@@ -58,6 +59,7 @@ router.post('/add', (req, res, next) => {
         res.redirect('/books');
       }
     })
+    
 });
 
 // GET the Book Details page in order to edit an existing Book
@@ -81,6 +83,11 @@ router.post('/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
+
+    //lrt is line has an error
+    //Probably its with ObjectId
+    //"Argument passed in must be a single String of 12 bytes or a string of 24 hex characters"
+
     let id = new mongoose.Types.ObjectId(req.params.id);
     let bookToEdit = book({
       "_id": id,
